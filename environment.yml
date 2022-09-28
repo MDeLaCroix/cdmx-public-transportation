@@ -1,0 +1,23 @@
+# conda env create --file environment.yml
+# mamba env create --file environment.yml
+name: cdmx-pt
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - black
+  - invoke
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - nbdime
+  - numpy
+  - pandas
+  - pip
+  - plotly
+  - pyjanitor
+  - pyprojroot
+  - python=3.7
+  - seaborn
+  
