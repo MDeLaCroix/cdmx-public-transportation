@@ -1,50 +1,31 @@
-from pyprojroot import here
-from pathlib import Path
-from typing import (
-    Union,
-    Callable,
-    Iterable,
-)
+import os
 
-def make_dir_function(
-    dir_name: Union[str, Iterable[str]]
-) -> Callable[..., Path]:
-    """Generate a fucntion that converts a string or iterable of strings into
-    a path relative to the project directory.
+CURRENT_DIR = os.getcwd()
 
-    Args:
-        dirname: Name of the subdirectories to extend the path of the main
-            project.
-            If an iterable of strings is passed as an argument, then it is
-            collapsed to a single steing with anchors dependent on the
-            operating system.
+def data_raw_dir():
+    """Generate path to data/raw/
 
     Returns:
-        A function that returns the path relative to a directory that can
-        receive `n` number of arguments for expansion.
+        path to data/raw/
     """
+    DATA_RAW_DIR = os.path.join(CURRENT_DIR, 'data', 'raw' + os.sep)
+    return DATA_RAW_DIR
 
-    def dir_path(*args) -> Path:
-        if isinstance(dir_name, str):
-            return here().joinpath(dir_name, *args)
-        else:
-            return here().joinpath(*dir_name, *args)
+def data_make_dataset():
+    """Generate path to cdmx-public-transportation/data/
 
-    return dir_path
+    Returns:
+        path to dmx-public-transportation/data/
+    """
+    MAKE_DATASET_DIR = os.path.join(CURRENT_DIR, 'cdmx-public-transportation', 'data' + os.sep)
+    return MAKE_DATASET_DIR
 
-project_dir = make_dir_function("")
+def data_interim():
+    """Generate path to data/interim/
 
-for dir_type in [
-        ["data"],
-        ["data", "raw"],
-        ["data", "processed"],
-        ["data", "interim"],
-        ["data", "external"],
-        ["models"],
-        ["notebooks"],
-        ["references"],
-        ["reports"],
-        ["reports", "figures"]
-    ]:
-    dir_var = '_'.join(dir_type) + "_dir"
-    exec(f"{dir_var} = make_dir_function({dir_type})")
+    Returns:
+        path to data/interim/
+    """
+    INTERIM_DIR = os.path.join(CURRENT_DIR, 'data', 'interim' + os.sep)
+    return INTERIM_DIR
+

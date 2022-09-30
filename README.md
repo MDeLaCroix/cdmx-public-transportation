@@ -1,7 +1,7 @@
 # cdmx-public-transportation
 
 A short description of the project.
-  
+
 ## Installation guide
 
 Please read [install.md](install.md) for details on how to set up this project.
