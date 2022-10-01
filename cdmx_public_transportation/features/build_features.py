@@ -12,3 +12,4 @@ def build_features():
     metrobus = metrobus.iloc[:,:9]
     metro.to_csv(str(data_interim()) + 'df_metro.csv')
     metrobus.to_csv(str(data_interim()) +  'df_metrobus.csv')
+    return metro, metrobus

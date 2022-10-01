@@ -155,12 +155,43 @@ y_pred = model.predict(X_test_mt)
 
 ## Fase 2
 
-km = input('Longitud del servicio en kilómetros: ')
-km = float(km)
-px = input('Pasajeros transportados (en millones): ')
-px = float(px)
+#km = input('Longitud del servicio en kilómetros: ')
+#km = float(km)
+#px = input('Pasajeros transportados (en millones): ')
+#px = float(px)
+km = 200
+px = 120
 new_data = pd.DataFrame(np.array([[km, px]]))
+
 
 X_new = scaler.transform(new_data)
 y_hat = model.predict(X_new)
 print(y_hat)
+
+## Visualize
+
+x_line = np.linspace(np.min(metro.iloc[:,3]),
+                     np.max(metro.iloc[:,3]),
+                     200)
+new_group = scaler.transform(np.column_stack((np.full(200, km),x_line)))
+y_line = model.predict(new_group)
+
+plt.plot(x_line, 
+         y_line, 
+         c='red')
+
+plt.vlines(x= px, 
+           ymin= np.min(metro.iloc[:,-1]), 
+           ymax= y_hat,
+           color= 'red',
+           linestyles= 'dashed')
+
+plt.scatter(metro.iloc[:,3], 
+            metro.iloc[:,4], 
+            c= metro.iloc[:,0], 
+            cmap='Blues')
+plt.colorbar().ax.set_ylabel(metro.columns[0])
+plt.xlabel(metro.columns[3])
+plt.ylabel(metro.columns[4])
+
+plt.show()
