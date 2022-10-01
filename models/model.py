@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import streamlit
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from cdmx_public_transportation.models.regress_model import Regress_model
