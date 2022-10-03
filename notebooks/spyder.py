@@ -14,12 +14,12 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.metrics import r2_score
     from sklearn.model_selection import train_test_split
-    
+
     if x_test is None or y_test is None:
         x_train,x_test,y_train,y_test = train_test_split(x_train,y_train,random_state=0,test_size=test_size)
 
     print('\nLinear Regression ...')
-    
+
     lr=LinearRegression()
     lr.fit(x_train,y_train)
     y_pred_lir = lr.predict(x_test)
@@ -27,7 +27,7 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
     print('Rsq :',lr_pred )
 
     print('\nPolinomial Regression ...')
-    
+
     polr=PolynomialFeatures(degree)
     x_polr=polr.fit_transform(x_train)
     polr.fit(x_polr,y_train)
@@ -45,7 +45,7 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
     print('Rsq :',svr_pred)
 
     print('\nDesision Tree ...')
-    
+
     d_tree=DecisionTreeRegressor(random_state=1)
     d_tree.fit(x_train,y_train)
     y_pred=d_tree.predict(x_test)
@@ -53,7 +53,7 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
     print('Rsq : ',d_tree_acc)
 
     print('\nRandom Forest ...')
-    
+
     rand = RandomForestRegressor(n_estimators = 100, random_state = 1)
     rand.fit(x_train,y_train)
     y_pred=rand.predict(x_test)
@@ -74,7 +74,7 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
         model=d_tree
     else:
         model=rand
-        
+
     xx=np.arange(0,5)
     plt.plot(xx,l)
     plt.ylabel('Rsq')
@@ -87,14 +87,14 @@ def Regress_model(x_train,y_train,x_test=None,y_test=None,degree=2,test_size=0.1
 def Get_VIF(X):
 
     """[summary]
-        PARAMETERS :-        
-            X = Pandas DataFrame 
-        
+        PARAMETERS :-
+            X = Pandas DataFrame
+
         Return :-
             Pandas DataFrame of Features and there VIF values
-        
+
     """
-    
+
     def A(X):
 
         vif_data = pd.DataFrame()
@@ -138,7 +138,7 @@ vif2 = Get_VIF(X_mt2)
 print(vif2)
 
 
-X_train_mt, X_test_mt, y_train_mt, y_test_mt = train_test_split(X_mt2, y_mt, 
+X_train_mt, X_test_mt, y_train_mt, y_test_mt = train_test_split(X_mt2, y_mt,
                                                                 random_state=19)
 
 scaler = StandardScaler().fit(X_train_mt)
@@ -176,19 +176,19 @@ x_line = np.linspace(np.min(metro.iloc[:,3]),
 new_group = scaler.transform(np.column_stack((np.full(200, km),x_line)))
 y_line = model.predict(new_group)
 
-plt.plot(x_line, 
-         y_line, 
+plt.plot(x_line,
+         y_line,
          c='red')
 
-plt.vlines(x= px, 
-           ymin= np.min(metro.iloc[:,-1]), 
+plt.vlines(x= px,
+           ymin= np.min(metro.iloc[:,-1]),
            ymax= y_hat,
            color= 'red',
            linestyles= 'dashed')
 
-plt.scatter(metro.iloc[:,3], 
-            metro.iloc[:,4], 
-            c= metro.iloc[:,0], 
+plt.scatter(metro.iloc[:,3],
+            metro.iloc[:,4],
+            c= metro.iloc[:,0],
             cmap='Blues')
 plt.colorbar().ax.set_ylabel(metro.columns[0])
 plt.xlabel(metro.columns[3])
