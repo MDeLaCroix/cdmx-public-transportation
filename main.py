@@ -6,9 +6,14 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 def run():
     title()
     first_paragraph()
-    fig = deploy_model()
+    target_paragraph()
+    analysis_paragraph()
+    how_to_paragraph()
+    fig, prediction = deploy_model()
+    pred_text = f'Dados los parámetros proporcionados el consumo será de {prediction} KWH,'
+    st.text(pred_text)
     st.pyplot(fig, clear_figure= False)
-    #st.title('Energía eléctrica necesaria para el funcionamiento del STC Metro de la Ciudad de México')
+
 
 if __name__ == '__main__':
     run()

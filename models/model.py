@@ -83,4 +83,5 @@ class Model:
         plt.xlabel(metro.columns[3])
         plt.ylabel(metro.columns[4])
         self.figure = fig
+        self.y_hat = str(y_hat)
 
